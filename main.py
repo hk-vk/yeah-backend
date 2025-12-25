@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import ORJSONResponse, JSONResponse
 from supabase import create_client, Client
 from app.schemas import AnalysisRequestCreate, AnalysisRequestResponse, FeedbackCreate
-from app.routers import feedback
+from app.routers import feedback, news_analysis
 from app.services.news_analysis import NewsAnalysisService
 from app.services import get_analyzer
 from app.api.v1.endpoints import exa_service, image_analysis
@@ -82,6 +82,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(feedback.router)
+app.include_router(news_analysis.router, prefix="/api")
 app.include_router(exa_service.router, prefix="/api")
 app.include_router(image_analysis.router, prefix="/api/v1/image-analysis")
 
